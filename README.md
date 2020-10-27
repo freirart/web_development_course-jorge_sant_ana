@@ -1,4 +1,4 @@
-# Curso completo de Desenvolvimento Web - Crie 6 projetos
+# Curso completo de Desenvolvimento Web
 
 Aprenda a desenvolver sites e sistemas web do zero utilizando **HTML**, **CSS**, **Bootstrap**, **JavaScript**, **JQuery**, **PHP**, **POO** e **MySQL**.
 
