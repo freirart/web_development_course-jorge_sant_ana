@@ -1,3 +1,13 @@
+@keyframes up {
+  from {
+      opacity: 0;
+      transform: translateY(1rem);
+  }
+  to {
+      opacity: 1;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -12,6 +22,7 @@ html, body {
 
 body {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow-x: hidden;
@@ -29,6 +40,7 @@ body {
   height: 350px;
   width: 350px;
   position: relative;
+  animation: up 0.3s;
 }
 
 table, .line-container {
@@ -130,3 +142,25 @@ td:hover {
   transform: rotate(45deg);
 }
 
+.play-again {
+  width: 100%;
+  text-align: center;
+  display: block;
+  background: transparent;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  margin: 3rem;
+  border: 1px solid #333;
+  color: #333;
+}
+
+.play-again:hover {
+  background: #333;
+  color: white;
+  transition: 0.3s;
+}
+
+.end {
+  animation: up 0.2s;
+}

@@ -11,7 +11,7 @@
     [slots[6], slots[7], slots[8]]
   ];
 
-  slots.click(play);
+  $("body").on("click", "td", play);
 
   function play() {
 
@@ -31,62 +31,85 @@
       && board[0][0].innerText == board[0][2].innerText) 
       && board[0][0].innerText) 
     {
-      showWinner('.horizontal.top');
+      return showWinner('.horizontal.top');
     }
     if ((board[1][0].innerText == board[1][1].innerText 
       && board[1][0].innerText == board[1][2].innerText) 
       && board[1][0].innerText) 
     {
-      showWinner('.horizontal.middle');
+      return showWinner('.horizontal.middle');
     }
     if ((board[2][0].innerText == board[2][1].innerText 
       && board[2][0].innerText == board[2][2].innerText) 
       && board[2][0].innerText) 
     {
-      showWinner('.horizontal.bottom');
+      return showWinner('.horizontal.bottom');
     }
     
     if ((board[0][0].innerText == board[1][0].innerText 
       && board[0][0].innerText == board[2][0].innerText) 
       && board[0][0].innerText) 
     {
-      showWinner('.vertical.left');
+      return showWinner('.vertical.left');
     }
     if ((board[0][1].innerText == board[1][1].innerText 
       && board[0][1].innerText == board[2][1].innerText) 
       && board[0][1].innerText) 
     {
-      showWinner('.vertical.middle');
+      return showWinner('.vertical.middle');
     }
     if ((board[0][2].innerText == board[1][2].innerText 
       && board[0][2].innerText == board[2][2].innerText) 
       && board[0][2].innerText) 
     {
-      showWinner('.vertical.right');
+      return showWinner('.vertical.right');
     }
 
     if ((board[0][0].innerText == board[1][1].innerText
       && board[0][0].innerText == board[2][2].innerText)
       && board[0][0].innerText) 
     {
-      showWinner('.diagonal.LT-RB')
+      return showWinner('.diagonal.LT-RB')
     }
     if ((board[0][2].innerText == board[1][1].innerText
       && board[0][2].innerText == board[2][0].innerText)
       && board[0][2].innerText) 
     {
-      showWinner('.diagonal.RT-LB')
+      return showWinner('.diagonal.RT-LB')
+    }
+    if ( board[0][0].innerText && board[0][1].innerText && board[0][2].innerText 
+      && board[1][0].innerText && board[1][1].innerText && board[1][2].innerText
+      && board[2][0].innerText && board[2][1].innerText && board[2][2].innerText) 
+    {
+      return showWinner();
     }
   }
 
   function showWinner(classId) {
-    $(classId)[0].classList.remove('hidden');
-    
-    const player = (turn % 2 == 0 ? 'O' : 'X');
+    $("body").off("click", "td", play);
+    let time = 500;
+    let mensagem;
 
-    setTimeout(() => {
-      $('body')[0].innerHTML = `<h1> '${player}' é o vencedor.`;
-    }, 1500);
+    if (classId) {
+      $(classId)[0].classList.remove('hidden');
+    
+      const player = (turn % 2 == 0 ? 'O' : 'X');
+      mensagem = `
+        <div class="end">
+          <h1 align="center">'${player}' é o vencedor.</h1>
+          <a href="index.html" class="play-again">Jogar novamente<a/>
+        </div>
+      `;
+      time = 1500;
+    } else {
+      mensagem = `
+        <div class="end">
+          <h1 align="center">Empate.</h1>
+          <a href="index.html" class="play-again">Jogar novamente<a/>
+        </div>
+      `;
+    }
+    setTimeout(() => {$('body')[0].innerHTML = mensagem;}, time);
   }
 
 })(window, document);
